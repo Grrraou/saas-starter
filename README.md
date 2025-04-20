@@ -68,6 +68,52 @@ Optionally, you can listen for Stripe webhooks locally through their CLI to hand
 stripe listen --forward-to localhost:3000/api/stripe/webhook
 ```
 
+## Running with Docker
+
+The project can be run using Docker Compose or Make commands:
+
+### Using Make (Recommended)
+
+1. Start the development environment:
+```bash
+make dev
+```
+
+2. Run database migrations and seed the database:
+```bash
+make migrate
+make seed
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+Other useful Make commands:
+- `make build` - Build containers without starting them
+- `make down` - Stop all containers
+- `make clean` - Stop containers and clean up volumes and build artifacts
+
+### Using Docker Compose Directly
+
+1. Build and start the containers:
+```bash
+docker-compose up --build
+```
+
+2. Run database migrations and seed the database:
+```bash
+docker-compose exec app pnpm db:migrate
+docker-compose exec app pnpm db:seed
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+To stop the containers:
+```bash
+docker-compose down
+```
+
+Note: Make sure to update the environment variables in `docker-compose.yml` with your actual values before running in production.
+
 ## Testing Payments
 
 To test Stripe payments, use the following test card details:
